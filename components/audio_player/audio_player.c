@@ -48,14 +48,14 @@ static int start_decoder_task(player_t *player)
             break;
 
         case AUDIO_MP4:
-        //    task_func = libfaac_decoder_task;
+            task_func = libfaac_decoder_task;
             task_name = "libfaac_decoder_task";
             stack_depth = 55000;
             break;
 
         case AUDIO_AAC:
         case OCTET_STREAM: // probably .aac
-         //   task_func = fdkaac_decoder_task;
+            task_func = fdkaac_decoder_task;
             task_name = "fdkaac_decoder_task";
             stack_depth = 6144;
             break;
