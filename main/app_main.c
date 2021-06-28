@@ -21,7 +21,7 @@
 #include "web_radio.h"
 #include "playerconfig.h"
 #include "wifi.h"
-#include "app_main.h"
+
 #ifdef CONFIG_BT_SPEAKER_MODE
 #include "bt_speaker.h"
 #endif
@@ -38,7 +38,6 @@
 #define PRIO_READER configMAX_PRIORITIES -3
 #define PRIO_MQTT configMAX_PRIORITIES - 3
 #define PRIO_CONNECT configMAX_PRIORITIES -1
-
 
 
 static void init_hardware()
@@ -124,7 +123,7 @@ static void start_web_radio()
 /**
  * entry point
  */
-void app_main()
+void app_main(void)
 {
     ESP_LOGI(TAG, "starting app_main()");
     ESP_LOGI(TAG, "RAM left: %u", esp_get_free_heap_size());

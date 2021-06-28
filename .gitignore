@@ -1,8 +1,13 @@
 /build/
-
 /.settings/
 /.cproject
 /.project
-/sdkconfig
-/sdkconfig.old
+
 /.vscode
+/.vs
+/out
+
+mp3decoder.zip
+main/main.c
+sdkconfig
+sdkconfig.old

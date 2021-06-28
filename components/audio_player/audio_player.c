@@ -7,21 +7,25 @@
 
 #include <stdlib.h>
 #include "freertos/FreeRTOS.h"
-
+#include "mp3_decoder.h"
 #include "audio_player.h"
 #include "spiram_fifo.h"
 #include "freertos/task.h"
 
+
+
 #include "esp_system.h"
 #include "esp_log.h"
 
-#include "fdk_aac_decoder.h"
-#include "libfaad_decoder.h"
-#include "mp3_decoder.h"
 #include "controls.h"
 
 #define TAG "audio_player"
 #define PRIO_MAD configMAX_PRIORITIES - 2
+
+
+#include "fdk_aac_decoder.h"
+#include "libfaad_decoder.h"
+
 
 static player_t *player_instance = NULL;
 static component_status_t player_status = UNINITIALIZED;
@@ -33,8 +37,9 @@ static int start_decoder_task(player_t *player)
     uint16_t stack_depth;
 
     ESP_LOGI(TAG, "RAM left %d", esp_get_free_heap_size());
-
-    switch (player->media_stream->content_type)
+	//task_func = NULL;
+    
+	switch (player->media_stream->content_type)
     {
         case AUDIO_MPEG:
             task_func = mp3_decoder_task;
@@ -43,14 +48,14 @@ static int start_decoder_task(player_t *player)
             break;
 
         case AUDIO_MP4:
-            task_func = libfaac_decoder_task;
+        //    task_func = libfaac_decoder_task;
             task_name = "libfaac_decoder_task";
             stack_depth = 55000;
             break;
 
         case AUDIO_AAC:
         case OCTET_STREAM: // probably .aac
-            task_func = fdkaac_decoder_task;
+         //   task_func = fdkaac_decoder_task;
             task_name = "fdkaac_decoder_task";
             stack_depth = 6144;
             break;
@@ -76,8 +81,7 @@ static int start_decoder_task(player_t *player)
 static int t;
 
 /* Writes bytes into the FIFO queue, starts decoder task if necessary. */
-int audio_stream_consumer(const char *recv_buf, ssize_t bytes_read,
-        void *user_data)
+int audio_stream_consumer(const char *recv_buf, ssize_t bytes_read, void *user_data)
 {
     player_t *player = user_data;
 

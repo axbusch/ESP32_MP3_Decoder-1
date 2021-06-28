@@ -1,9 +1,8 @@
 message("Build components/fdk_aac_decoder")
-idf_component_register(SRC_DIRS . 
+idf_component_register(SRCS "fdk_aac_decoder.c" 
                        INCLUDE_DIRS "include"
-					   PRIV_REQUIRES  fdk-aac audio_player libm4a
-					   REQUIRES common
-                       )
+					   PRIV_REQUIRES  common fdk-aac audio_player libm4a 
+					   )
    
 					
 target_compile_options(${COMPONENT_LIB} PRIVATE   
