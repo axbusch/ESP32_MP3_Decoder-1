@@ -22,7 +22,7 @@
 
 #define TAG "ui"
 
-#define delay_ms(ms) ((ms) / portTICK_RATE_MS)
+#define delay_ms(ms) ((ms) / portTICK_PERIOD_MS )
 
 
 typedef struct {
