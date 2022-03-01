@@ -30,9 +30,9 @@
 static int fifoRpos;
 static int fifoWpos;
 static int fifoFill;
-static xSemaphoreHandle semCanRead;
-static xSemaphoreHandle semCanWrite;
-static xSemaphoreHandle mux;
+static SemaphoreHandle_t semCanRead;
+static SemaphoreHandle_t semCanWrite;
+static SemaphoreHandle_t mux;
 static long fifoOvfCnt, fifoUdrCnt;
 
 //Low watermark where we restart the reader thread.
