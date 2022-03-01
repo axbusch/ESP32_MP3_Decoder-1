@@ -21,7 +21,7 @@ static void bt_app_task_handler(void *arg);
 static bool bt_app_send_msg(bt_app_msg_t *msg);
 static void bt_app_work_dispatched(bt_app_msg_t *msg);
 
-static xQueueHandle bt_app_task_queue = NULL;
+static QueueHandle_t bt_app_task_queue = NULL;
 static xTaskHandle bt_app_task_handle = NULL;
 
 bool bt_app_work_dispatch(bt_app_cb_t p_cback, uint16_t event, void *p_params, int param_len, bt_app_copy_cb_t p_copy_cback)
@@ -57,7 +57,7 @@ static bool bt_app_send_msg(bt_app_msg_t *msg)
         return false;
     }
 
-    if (xQueueSend(bt_app_task_queue, msg, 10 / portTICK_RATE_MS) != pdTRUE) {
+    if (xQueueSend(bt_app_task_queue, msg, 10 / portTICK_PERIOD_MS ) != pdTRUE) {
         ESP_LOGE(BT_APP_CORE_TAG, "%s xQueue send failed", __func__);
         return false;
     }

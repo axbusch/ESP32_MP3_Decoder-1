@@ -210,7 +210,7 @@ void web_radio_gpio_handler_task(void *pvParams)
 {
     gpio_handler_param_t *params = pvParams;
     web_radio_t *config = params->user_data;
-    xQueueHandle gpio_evt_queue = params->gpio_evt_queue;
+    QueueHandle_t gpio_evt_queue = params->gpio_evt_queue;
 
     uint32_t io_num;
     for (;;) {

@@ -9,7 +9,7 @@
 #define _CONTROLS_H_
 
 typedef struct {
-    xQueueHandle gpio_evt_queue;
+    QueueHandle_t gpio_evt_queue;
     void *user_data;
 } gpio_handler_param_t;
 
